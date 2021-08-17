@@ -1,0 +1,8 @@
+INDEX VERSION 1.131+C:\Users\$FM0100-VC3IOGLIDSEM\Documents\technicraft\WorkspaceLauncher\.metadata\.plugins\org.eclipse.jdt.core
+166819071.index
+4269503885.index
+3067506193.index
+3380904535.index
+2962513901.index
+650085925.index
+4231925418.index

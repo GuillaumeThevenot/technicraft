@@ -1,0 +1,81 @@
+package fr.theshark34.technicraft.launcher;
+
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import fr.theshark34.openlauncherlib.launcher.util.UsernameSaver;
+import fr.theshark34.swinger.Swinger;
+import static fr.theshark34.swinger.Swinger.*;
+import fr.theshark34.swinger.event.SwingerEvent;
+import fr.theshark34.swinger.event.SwingerEventListener;
+import fr.theshark34.swinger.textured.STexturedButton;
+
+@SuppressWarnings("serial")
+public class LauncherPanel extends JPanel implements SwingerEventListener {
+
+	private Image background = getResource("background.png");
+	
+	private UsernameSaver saver = new UsernameSaver(Launcher.SC_INFOS);
+	
+	private JTextField usernameField = new JTextField(saver.getUsername(""));
+	private JTextField passwordField = new JPasswordField();	
+	
+	private STexturedButton playButton = new STexturedButton(getResource("play.png"));
+	private STexturedButton quitButton = new STexturedButton(getResource("quit.png"));
+	private STexturedButton hideButton = new STexturedButton(getResource("hide.png"));
+	
+	public LauncherPanel() {
+		this.setLayout(null);
+		
+		usernameField.setFont(usernameField.getFont().deriveFont(22F));
+		usernameField.setBounds(566, 254, 262, 39);
+		this.add(usernameField);
+		
+		passwordField.setFont(usernameField.getFont());
+		passwordField.setBounds(566, 375, 262, 39);
+		this.add(passwordField);
+		
+		playButton.setBounds(562, 464);
+		playButton.addEventListener(this);
+		this.add(playButton);
+		
+		quitButton.setBounds(923, 18);
+		quitButton.addEventListener(this);
+		this.add(quitButton);
+		
+		hideButton.setBounds(883, 18);
+		hideButton.addEventListener(this);
+		this.add(hideButton);
+	}
+	
+	@Override
+	public void onEvent(SwingerEvent e) {
+		if(e.getSource() == playButton) {
+			setFieldsEnabled(false);
+			
+			if(usernameField.getText().replace(" ", ""))			
+		} else if(e.getSource() == quitButton)
+			System.exit(0);
+		else if(e.getSource() == hideButton)
+			LauncherFrame.getInstance().setState(JFrame.ICONIFIED);
+			
+	}
+	
+	@Override
+	public void paintComponent(Graphics graphics) {
+		super.paintComponent(graphics);
+		drawFullsizedImage(graphics, this, background);	
+	}
+	
+	private void setFieldsEnabled(boolean enabled) {
+		usernameField.setEnabled(enabled);
+		passwordField.setEnabled(enabled);
+		playButton.setEnabled(enabled);
+	}
+	
+}

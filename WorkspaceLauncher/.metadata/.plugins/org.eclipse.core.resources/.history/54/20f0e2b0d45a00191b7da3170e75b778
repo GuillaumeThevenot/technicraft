@@ -1,0 +1,26 @@
+package fr.theshark34.technicraft.launcher;
+
+import java.io.File;
+
+import fr.theshark34.openauth.AuthPoints;
+import fr.theshark34.openauth.AuthenticationException;
+import fr.theshark34.openauth.Authenticator;
+import fr.theshark34.openauth.model.AuthAgent;
+import fr.theshark34.openauth.model.response.AuthResponse;
+import fr.theshark34.openlauncherlib.launcher.GameInfos;
+import fr.theshark34.openlauncherlib.launcher.GameTweak;
+import fr.theshark34.openlauncherlib.launcher.GameType;
+import fr.theshark34.openlauncherlib.launcher.GameVersion;
+
+public class Launcher {
+	
+	public static final GameVersion SC_VERSION = new GameVersion("1.12.2", GameType.V1_8_HIGHER);
+	public static final GameInfos SC_INFOS = new GameInfos("Technicraft V3", SC_VERSION, true,new GameTweak[] {GameTweak.FORGE});
+	public static final File SC_DIR = SC_INFOS.getGameDir();
+	
+	public static void auth(String username, String password) throws AuthenticationException {
+		Authenticator authenticator = new Authenticator(Authenticator.MOJANG_AUTH_URL, AuthPoints.NORMAL_AUTH_POINTS);
+		AuthResponse response = authenticator.authenticate(AuthAgent.MINECRAFT, username, password, "");
+	}
+	
+}
